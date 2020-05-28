@@ -54,7 +54,7 @@ CREATE TABLE `command` (
   `user_id` int unsigned NOT NULL,
   `adress_id` int unsigned DEFAULT NULL,
   `local_id` int unsigned NOT NULL,
-  `price` int unsigned NOT NULL,
+  `price` decimal(3,2) unsigned NOT NULL,
   `card_number` varchar(45) DEFAULT NULL,
   `status` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -142,7 +142,7 @@ CREATE TABLE `pizza` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `description` mediumtext NOT NULL,
-  `price` int unsigned NOT NULL,
+  `price` decimal(3,2) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -281,4 +281,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-27 15:10:13
+-- Dump completed on 2020-05-28 11:27:05
