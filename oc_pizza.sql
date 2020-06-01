@@ -86,14 +86,11 @@ DROP TABLE IF EXISTS `command_detail`;
 CREATE TABLE `command_detail` (
   `comand_id` int unsigned NOT NULL,
   `pizza_id` int unsigned DEFAULT NULL,
-  `product_id` int unsigned DEFAULT NULL,
   `quantity` int unsigned NOT NULL,
   KEY `fk_detail_command_idx` (`comand_id`),
   KEY `fk_detail_pizza_idx` (`pizza_id`),
-  KEY `fk_detail_product_idx` (`product_id`),
   CONSTRAINT `fk_detail_command` FOREIGN KEY (`comand_id`) REFERENCES `command` (`id`),
-  CONSTRAINT `fk_detail_pizza` FOREIGN KEY (`pizza_id`) REFERENCES `pizza` (`id`),
-  CONSTRAINT `fk_detail_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+  CONSTRAINT `fk_detail_pizza` FOREIGN KEY (`pizza_id`) REFERENCES `pizza` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -104,6 +101,32 @@ CREATE TABLE `command_detail` (
 LOCK TABLES `command_detail` WRITE;
 /*!40000 ALTER TABLE `command_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `command_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ingredient`
+--
+
+DROP TABLE IF EXISTS `ingredient`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ingredient` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `description` mediumtext NOT NULL,
+  `price` decimal(3,2) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ingredient`
+--
+
+LOCK TABLES `ingredient` WRITE;
+/*!40000 ALTER TABLE `ingredient` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ingredient` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -158,32 +181,6 @@ LOCK TABLES `pizza` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `product`
---
-
-DROP TABLE IF EXISTS `product`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `product` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `description` mediumtext NOT NULL,
-  `price` decimal(3,2) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `product`
---
-
-LOCK TABLES `product` WRITE;
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `recipe`
 --
 
@@ -192,13 +189,13 @@ DROP TABLE IF EXISTS `recipe`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `recipe` (
   `pizza_id` int unsigned NOT NULL,
-  `product_id` int unsigned NOT NULL,
+  `ingredient_id` int unsigned NOT NULL,
   `quantity` int unsigned NOT NULL,
   `comments` mediumtext NOT NULL,
   KEY `fk_recipe_pizza_idx` (`pizza_id`),
-  KEY `fk_recipe_product_idx` (`product_id`),
-  CONSTRAINT `fk_recipe_pizza` FOREIGN KEY (`pizza_id`) REFERENCES `pizza` (`id`),
-  CONSTRAINT `fk_recipe_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+  KEY `fk_recipe_product_idx` (`ingredient_id`),
+  CONSTRAINT `fk_recipe_ingredient` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredient` (`id`),
+  CONSTRAINT `fk_recipe_pizza` FOREIGN KEY (`pizza_id`) REFERENCES `pizza` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -220,12 +217,12 @@ DROP TABLE IF EXISTS `stock`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `stock` (
   `local_id` int unsigned NOT NULL,
-  `product_id` int unsigned NOT NULL,
+  `ingredient_id` int unsigned NOT NULL,
   `quantity` int unsigned NOT NULL,
   KEY `fk_stock_local_idx` (`local_id`),
-  KEY `fk_stock_product_idx` (`product_id`),
-  CONSTRAINT `fk_stock_local` FOREIGN KEY (`local_id`) REFERENCES `local` (`id`),
-  CONSTRAINT `fk_stock_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+  KEY `fk_stock_ingredient_idx` (`ingredient_id`),
+  CONSTRAINT `fk_stock_ingredient` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredient` (`id`),
+  CONSTRAINT `fk_stock_local` FOREIGN KEY (`local_id`) REFERENCES `local` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -281,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-28 11:27:05
+-- Dump completed on 2020-06-01 18:12:54
