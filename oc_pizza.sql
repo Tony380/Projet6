@@ -193,7 +193,7 @@ CREATE TABLE `recipe` (
   `quantity` int unsigned NOT NULL,
   `comments` mediumtext NOT NULL,
   KEY `fk_recipe_pizza_idx` (`pizza_id`),
-  KEY `fk_recipe_product_idx` (`ingredient_id`),
+  KEY `fk_recipe_ingredient_idx` (`ingredient_id`),
   CONSTRAINT `fk_recipe_ingredient` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredient` (`id`),
   CONSTRAINT `fk_recipe_pizza` FOREIGN KEY (`pizza_id`) REFERENCES `pizza` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -278,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-01 18:12:54
+-- Dump completed on 2020-06-01 18:24:51
