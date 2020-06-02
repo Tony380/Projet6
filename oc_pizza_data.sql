@@ -36,7 +36,7 @@ CREATE TABLE `command` (
   KEY `fk_command_local` (`local_id`),
   CONSTRAINT `fk_command_local` FOREIGN KEY (`local_id`) REFERENCES `local` (`id`),
   CONSTRAINT `fk_command_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `command` (
 
 LOCK TABLES `command` WRITE;
 /*!40000 ALTER TABLE `command` DISABLE KEYS */;
+INSERT INTO `command` VALUES (1,1,1,'11 rue des moines, 75001, paris',21.00,'carte','2345267398763549','livrée'),(2,3,2,'10 rue des peupliers, 75003, paris',12.00,'cash',NULL,'commande prete'),(3,2,3,'30 avenue des lombards. 75002, paris',44.00,'carte','2369236235707575','en preparation');
 /*!40000 ALTER TABLE `command` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,6 +73,7 @@ CREATE TABLE `command_detail` (
 
 LOCK TABLES `command_detail` WRITE;
 /*!40000 ALTER TABLE `command_detail` DISABLE KEYS */;
+INSERT INTO `command_detail` VALUES (1,1,1),(1,2,1),(2,3,1),(3,4,2),(3,5,1);
 /*!40000 ALTER TABLE `command_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +90,7 @@ CREATE TABLE `ingredient` (
   `description` mediumtext NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +99,7 @@ CREATE TABLE `ingredient` (
 
 LOCK TABLES `ingredient` WRITE;
 /*!40000 ALTER TABLE `ingredient` DISABLE KEYS */;
+INSERT INTO `ingredient` VALUES (1,'gruyere','fromage gruyere'),(2,'tomate','tomate fruit'),(3,'viande','viande de boeuf'),(4,'crevette','fruit de mer'),(5,'gorgonzolla','fromage italien'),(6,'jambon','tranche de jambon');
 /*!40000 ALTER TABLE `ingredient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +115,7 @@ CREATE TABLE `local` (
   `adress` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `adress_UNIQUE` (`adress`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +124,7 @@ CREATE TABLE `local` (
 
 LOCK TABLES `local` WRITE;
 /*!40000 ALTER TABLE `local` DISABLE KEYS */;
+INSERT INTO `local` VALUES (4,'12 rue de la faisanderie, 75004, paris'),(5,'23 boulevard schumann, 75005, paris'),(1,'25 avenue du general de gaulle, 75001, paris'),(2,'33 rue du chat botte, 75002, paris'),(3,'77 rue du moulin, 75003, paris');
 /*!40000 ALTER TABLE `local` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +142,7 @@ CREATE TABLE `pizza` (
   `price` decimal(4,2) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,6 +151,7 @@ CREATE TABLE `pizza` (
 
 LOCK TABLES `pizza` WRITE;
 /*!40000 ALTER TABLE `pizza` DISABLE KEYS */;
+INSERT INTO `pizza` VALUES (1,'napolitaine','jamon, gruyere',11.00),(2,'margarita','tomate, gruyere',10.00),(3,'4 fromages','brie, gorgonzolla, roquefort, camembert',12.00),(4,'florence','viande, gruyere, tomate, oignon',15.00),(5,'venise','crevette, tomate, gruyere',14.00);
 /*!40000 ALTER TABLE `pizza` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,6 +180,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
+INSERT INTO `recipe` VALUES (1,1,20,'emincer gruyere'),(1,6,20,'emincer jambon'),(2,1,20,'emincer gruyere'),(2,2,20,'couper les tomates en rondelles');
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,6 +208,7 @@ CREATE TABLE `stock` (
 
 LOCK TABLES `stock` WRITE;
 /*!40000 ALTER TABLE `stock` DISABLE KEYS */;
+INSERT INTO `stock` VALUES (1,1,1000),(1,2,1000),(1,3,1500),(2,1,1000),(2,2,1000),(2,3,1500);
 /*!40000 ALTER TABLE `stock` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +231,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_user_local` (`local_id`),
   CONSTRAINT `fk_user_local` FOREIGN KEY (`local_id`) REFERENCES `local` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,6 +240,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'jean','dupuis','jdupuis@gmail.com','dupuisjean',NULL,NULL),(2,'elodie','marchais','emarchais@gmail.com','marchaise',NULL,NULL),(3,'marc','dupont','mdupont@gmail.com','dupontmarc',NULL,NULL),(4,'henri','falaise','hfalise@gmail.com','henrif','pizzaiolo',1),(5,'nicolas','vernier','nicovernier@gmail.com','nicov','livreur',4);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -245,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-02 12:02:29
+-- Dump completed on 2020-06-02 14:01:28
