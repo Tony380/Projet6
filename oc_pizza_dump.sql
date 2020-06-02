@@ -16,33 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `adress`
---
-
-DROP TABLE IF EXISTS `adress`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `adress` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `street` varchar(45) NOT NULL,
-  `number` varchar(5) NOT NULL,
-  `city` varchar(45) NOT NULL,
-  `postal_code` varchar(5) NOT NULL,
-  `comments` mediumtext,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `adress`
---
-
-LOCK TABLES `adress` WRITE;
-/*!40000 ALTER TABLE `adress` DISABLE KEYS */;
-/*!40000 ALTER TABLE `adress` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `command`
 --
 
@@ -51,17 +24,16 @@ DROP TABLE IF EXISTS `command`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `command` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int unsigned NOT NULL,
-  `adress_id` int unsigned DEFAULT NULL,
   `local_id` int unsigned NOT NULL,
+  `user_id` int unsigned NOT NULL,
+  `adress` varchar(250) NOT NULL,
   `price` decimal(3,2) unsigned NOT NULL,
+  `payment_mode` varchar(15) NOT NULL,
   `card_number` varchar(45) DEFAULT NULL,
-  `status` varchar(45) NOT NULL,
+  `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_command_user_idx` (`user_id`),
-  KEY `fk_command_adress_idx` (`adress_id`),
-  KEY `fk_command_local_idx` (`local_id`),
-  CONSTRAINT `fk_command_adress` FOREIGN KEY (`adress_id`) REFERENCES `adress` (`id`),
+  KEY `fk_command_user` (`user_id`),
+  KEY `fk_command_local` (`local_id`),
   CONSTRAINT `fk_command_local` FOREIGN KEY (`local_id`) REFERENCES `local` (`id`),
   CONSTRAINT `fk_command_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -85,10 +57,10 @@ DROP TABLE IF EXISTS `command_detail`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `command_detail` (
   `comand_id` int unsigned NOT NULL,
-  `pizza_id` int unsigned DEFAULT NULL,
+  `pizza_id` int unsigned NOT NULL,
   `quantity` int unsigned NOT NULL,
-  KEY `fk_detail_command_idx` (`comand_id`),
-  KEY `fk_detail_pizza_idx` (`pizza_id`),
+  KEY `fk_detail_command` (`comand_id`) /*!80000 INVISIBLE */,
+  KEY `fk_detail_pizza` (`pizza_id`),
   CONSTRAINT `fk_detail_command` FOREIGN KEY (`comand_id`) REFERENCES `command` (`id`),
   CONSTRAINT `fk_detail_pizza` FOREIGN KEY (`pizza_id`) REFERENCES `pizza` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -114,7 +86,6 @@ CREATE TABLE `ingredient` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `description` mediumtext NOT NULL,
-  `price` decimal(3,2) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -138,10 +109,9 @@ DROP TABLE IF EXISTS `local`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `local` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `adress_id` int unsigned NOT NULL,
+  `adress` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `adress_id_UNIQUE` (`adress_id`),
-  CONSTRAINT `fk_local_adress` FOREIGN KEY (`adress_id`) REFERENCES `adress` (`id`)
+  UNIQUE KEY `adress_UNIQUE` (`adress`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -192,8 +162,8 @@ CREATE TABLE `recipe` (
   `ingredient_id` int unsigned NOT NULL,
   `quantity` int unsigned NOT NULL,
   `comments` mediumtext NOT NULL,
-  KEY `fk_recipe_pizza_idx` (`pizza_id`),
-  KEY `fk_recipe_ingredient_idx` (`ingredient_id`),
+  KEY `fk_recipe_pizza` (`pizza_id`),
+  KEY `fk_recipe_ingredient` (`ingredient_id`),
   CONSTRAINT `fk_recipe_ingredient` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredient` (`id`),
   CONSTRAINT `fk_recipe_pizza` FOREIGN KEY (`pizza_id`) REFERENCES `pizza` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -219,8 +189,8 @@ CREATE TABLE `stock` (
   `local_id` int unsigned NOT NULL,
   `ingredient_id` int unsigned NOT NULL,
   `quantity` int unsigned NOT NULL,
-  KEY `fk_stock_local_idx` (`local_id`),
-  KEY `fk_stock_ingredient_idx` (`ingredient_id`),
+  KEY `fk_stock_local` (`local_id`),
+  KEY `fk_stock_ingredient` (`ingredient_id`),
   CONSTRAINT `fk_stock_ingredient` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredient` (`id`),
   CONSTRAINT `fk_stock_local` FOREIGN KEY (`local_id`) REFERENCES `local` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -248,16 +218,13 @@ CREATE TABLE `user` (
   `last_name` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `adress_id` int unsigned NOT NULL,
   `job` varchar(15) DEFAULT NULL,
   `local_id` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `adress_id_UNIQUE` (`adress_id`),
-  KEY `fk_user_local_idx` (`local_id`),
-  CONSTRAINT `fk_user_adress` FOREIGN KEY (`adress_id`) REFERENCES `adress` (`id`),
+  KEY `fk_user_local` (`local_id`),
   CONSTRAINT `fk_user_local` FOREIGN KEY (`local_id`) REFERENCES `local` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-01 18:24:51
+-- Dump completed on 2020-06-02 12:02:29
