@@ -27,7 +27,6 @@ CREATE TABLE `command` (
   `local_id` int unsigned NOT NULL,
   `user_id` int unsigned NOT NULL,
   `adress` varchar(250) NOT NULL,
-  `price` decimal(5,2) unsigned NOT NULL,
   `payment_mode` varchar(15) NOT NULL,
   `card_number` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
@@ -45,7 +44,7 @@ CREATE TABLE `command` (
 
 LOCK TABLES `command` WRITE;
 /*!40000 ALTER TABLE `command` DISABLE KEYS */;
-INSERT INTO `command` VALUES (1,1,1,'11 rue des moines, 75001, paris',21.00,'carte','2345267398763549','livrée'),(2,3,2,'10 rue des peupliers, 75003, paris',12.00,'cash',NULL,'commande prete'),(3,2,3,'30 avenue des lombards. 75002, paris',44.00,'carte','2369236235707575','en preparation');
+INSERT INTO `command` VALUES (1,1,1,'11 rue des moines, 75001, paris','carte','2345267398763549','livrée'),(2,3,2,'10 rue des peupliers, 75003, paris','cash',NULL,'commande prete'),(3,2,3,'30 avenue des lombards. 75002, paris','carte','2369236235707575','en preparation');
 /*!40000 ALTER TABLE `command` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-02 14:01:28
+-- Dump completed on 2020-06-08 14:36:09

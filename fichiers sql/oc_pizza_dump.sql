@@ -27,7 +27,6 @@ CREATE TABLE `command` (
   `local_id` int unsigned NOT NULL,
   `user_id` int unsigned NOT NULL,
   `adress` varchar(250) NOT NULL,
-  `price` decimal(5,2) unsigned NOT NULL,
   `payment_mode` varchar(15) NOT NULL,
   `card_number` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
