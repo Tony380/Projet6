@@ -44,7 +44,9 @@ CREATE TABLE `command` (
 
 LOCK TABLES `command` WRITE;
 /*!40000 ALTER TABLE `command` DISABLE KEYS */;
-INSERT INTO `command` VALUES (1,1,1,'11 rue des moines, 75001, paris','carte','2345267398763549','livrée'),(2,3,2,'10 rue des peupliers, 75003, paris','cash',NULL,'commande prete'),(3,2,3,'30 avenue des lombards. 75002, paris','carte','2369236235707575','en preparation');
+INSERT INTO `command` VALUES (1,1,1,'11 rue des moines, 75001, paris','carte','2345267398763549','livrée'),
+(2,3,2,'10 rue des peupliers, 75003, paris','cash',NULL,'commande prete'),
+(3,2,3,'30 avenue des lombards. 75002, paris','carte','2369236235707575','en preparation');
 /*!40000 ALTER TABLE `command` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +100,10 @@ CREATE TABLE `ingredient` (
 
 LOCK TABLES `ingredient` WRITE;
 /*!40000 ALTER TABLE `ingredient` DISABLE KEYS */;
-INSERT INTO `ingredient` VALUES (1,'gruyere','fromage gruyere'),(2,'tomate','tomate fruit'),(3,'viande','viande de boeuf'),(4,'crevette','fruit de mer'),(5,'gorgonzolla','fromage italien'),(6,'jambon','tranche de jambon');
+INSERT INTO `ingredient` VALUES (1,'gruyere','fromage gruyere'),
+(2,'tomate','tomate fruit'),(3,'viande','viande de boeuf'),
+(4,'crevette','fruit de mer'),(5,'gorgonzolla','fromage italien'),
+(6,'jambon','tranche de jambon');
 /*!40000 ALTER TABLE `ingredient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +128,11 @@ CREATE TABLE `local` (
 
 LOCK TABLES `local` WRITE;
 /*!40000 ALTER TABLE `local` DISABLE KEYS */;
-INSERT INTO `local` VALUES (4,'12 rue de la faisanderie, 75004, paris'),(5,'23 boulevard schumann, 75005, paris'),(1,'25 avenue du general de gaulle, 75001, paris'),(2,'33 rue du chat botte, 75002, paris'),(3,'77 rue du moulin, 75003, paris');
+INSERT INTO `local` VALUES (4,'12 rue de la faisanderie, 75004, paris'),
+(5,'23 boulevard schumann, 75005, paris'),
+(1,'25 avenue du general de gaulle, 75001, paris'),
+(2,'33 rue du chat botte, 75002, paris'),
+(3,'77 rue du moulin, 75003, paris');
 /*!40000 ALTER TABLE `local` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +159,11 @@ CREATE TABLE `pizza` (
 
 LOCK TABLES `pizza` WRITE;
 /*!40000 ALTER TABLE `pizza` DISABLE KEYS */;
-INSERT INTO `pizza` VALUES (1,'napolitaine','jamon, gruyere',11.00),(2,'margarita','tomate, gruyere',10.00),(3,'4 fromages','brie, gorgonzolla, roquefort, camembert',12.00),(4,'florence','viande, gruyere, tomate, oignon',15.00),(5,'venise','crevette, tomate, gruyere',14.00);
+INSERT INTO `pizza` VALUES (1,'napolitaine','jamon, gruyere',11.00),
+(2,'margarita','tomate, gruyere',10.00),
+(3,'4 fromages','brie, gorgonzolla, roquefort, camembert',12.00),
+(4,'florence','viande, gruyere, tomate, oignon',15.00),
+(5,'venise','crevette, tomate, gruyere',14.00);
 /*!40000 ALTER TABLE `pizza` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +192,9 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (1,1,20,'emincer gruyere'),(1,6,20,'emincer jambon'),(2,1,20,'emincer gruyere'),(2,2,20,'couper les tomates en rondelles');
+INSERT INTO `recipe` VALUES (1,1,20,'emincer gruyere'),
+(1,6,20,'emincer jambon'),(2,1,20,'emincer gruyere'),
+(2,2,20,'couper les tomates en rondelles');
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +254,11 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'jean','dupuis','jdupuis@gmail.com','dupuisjean',NULL,NULL),(2,'elodie','marchais','emarchais@gmail.com','marchaise',NULL,NULL),(3,'marc','dupont','mdupont@gmail.com','dupontmarc',NULL,NULL),(4,'henri','falaise','hfalise@gmail.com','henrif','pizzaiolo',1),(5,'nicolas','vernier','nicovernier@gmail.com','nicov','livreur',4);
+INSERT INTO `user` VALUES (1,'jean','dupuis','jdupuis@gmail.com','dupuisjean',NULL,NULL),
+(2,'elodie','marchais','emarchais@gmail.com','marchaise',NULL,NULL),
+(3,'marc','dupont','mdupont@gmail.com','dupontmarc',NULL,NULL),
+(4,'henri','falaise','hfalise@gmail.com','henrif','pizzaiolo',1),
+(5,'nicolas','vernier','nicovernier@gmail.com','nicov','livreur',4);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
