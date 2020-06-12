@@ -159,7 +159,7 @@ CREATE TABLE `pizza` (
 
 LOCK TABLES `pizza` WRITE;
 /*!40000 ALTER TABLE `pizza` DISABLE KEYS */;
-INSERT INTO `pizza` VALUES (1,'napolitaine','jamon, gruyere',11.00),
+INSERT INTO `pizza` VALUES (1,'napolitaine','jambon, gruyere',11.00),
 (2,'margarita','tomate, gruyere',10.00),
 (3,'4 fromages','brie, gorgonzolla, roquefort, camembert',12.00),
 (4,'florence','viande, gruyere, tomate, oignon',15.00),
