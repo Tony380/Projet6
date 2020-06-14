@@ -28,6 +28,7 @@ CREATE TABLE `command` (
   `user_id` int unsigned NOT NULL,
   `adress` varchar(250) NOT NULL,
   `zip_code` varchar(5) NOT NULL,
+  `date` date NOT NULL,
   `payment_mode` varchar(15) NOT NULL,
   `card_number` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
@@ -41,9 +42,6 @@ CREATE TABLE `command` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `command_detail`
---
 
 DROP TABLE IF EXISTS `command_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -59,9 +57,6 @@ CREATE TABLE `command_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `ingredient`
---
 
 DROP TABLE IF EXISTS `ingredient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -75,9 +70,6 @@ CREATE TABLE `ingredient` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `local`
---
 
 DROP TABLE IF EXISTS `local`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -90,9 +82,6 @@ CREATE TABLE `local` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `pizza`
---
 
 DROP TABLE IF EXISTS `pizza`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -107,9 +96,6 @@ CREATE TABLE `pizza` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `recipe`
---
 
 DROP TABLE IF EXISTS `recipe`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -126,9 +112,6 @@ CREATE TABLE `recipe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `stock`
---
 
 DROP TABLE IF EXISTS `stock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -144,9 +127,6 @@ CREATE TABLE `stock` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `user`
---
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -175,4 +155,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-13 13:33:32
+-- Dump completed on 2020-06-14 13:15:57
